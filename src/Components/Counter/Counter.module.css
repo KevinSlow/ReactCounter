@@ -1,0 +1,39 @@
+.appLayer{
+    max-width: 50%;
+    margin: auto;
+    background: #282c34;
+    margin-top: 5%;
+}
+.error{
+    border: 2px solid red;
+}
+.white{
+    color: white
+}
+button{
+    font-weight: bold;
+    background: #4CA5FF;
+    border-radius: 4px;
+    outline: none;
+    color: white;
+    width: 100px;
+    height: 30px;
+}
+.number>span {
+    font-size: 45px;
+}
+
+.number {
+    padding: 1em;
+}
+.button-blocks{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1em;
+}
+button:disabled{
+    background: red;
+    color: white;
+    font-weight: bold;
+    border: 2px solid red;
+}
