@@ -1,8 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;900&display=swap');
+.title{
+    font-family: 'Roboto Slab', serif;
+    font-size: 22px;
+}
+.counter {
+    padding: 1em;
+}
+.counter>span {
+    display: block;
+    margin-top: 0em;
+    font-size: 45px;
+}
+.buttonsBlocks {
+    display: flex;
+}
+.buttonsBlock {
+    padding: 1em;
+}
 .appLayer{
     max-width: 50%;
     margin: auto;
     background: #282c34;
     margin-top: 5%;
+}
+
+.CounterBlock{
+    flex: 50%;
 }
 .error{
     border: 2px solid red;
@@ -10,15 +33,7 @@
 .white{
     color: white
 }
-button{
-    font-weight: bold;
-    background: #4CA5FF;
-    border-radius: 4px;
-    outline: none;
-    color: white;
-    width: 100px;
-    height: 30px;
-}
+
 .number>span {
     font-size: 45px;
 }

@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from "react";
-import s from "./SettingCounter.module.css"
+import s from "./SettingsCounterCountainer.module.css"
 import {SettingCounter} from "../../Components/SettingCounter/SettingCounter";
 import {Counter} from "../../Components/Counter/Counter";
 
@@ -18,7 +18,7 @@ export const SettingCounterContainer = () => {
     }
 
     function Reset() {
-        setCount(0);
+        setCount(startValue);
     }
 
 
@@ -30,7 +30,6 @@ export const SettingCounterContainer = () => {
             return setCount(startValue);
         }
     }
-
 
     const onChangeHandlerMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
         let tt = +e.currentTarget.value
@@ -54,7 +53,7 @@ export const SettingCounterContainer = () => {
 
 
     return (
-        <div>
+        <div className={s.counterContainer}>
             <SettingCounter
                 error={error}
                 onChangeHandler={onChangeHandlerMaxValue}

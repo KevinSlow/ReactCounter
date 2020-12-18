@@ -12,23 +12,29 @@ type CounterPropsType = {
     onChangeHandlerMinValue: (e: ChangeEvent<HTMLInputElement>) => void,
 }
 
-export const SettingCounter = (props:CounterPropsType) => {
+export const SettingCounter = (props: CounterPropsType) => {
 
-    return(
-        <div className={"CounterBody"}>
-            <div>{props.titleValue}</div>
-            <div className="MaxValue">
-                <div>Max Value</div>
-                <p>{props.onChangeHandler}</p>
-                <input className={props.maxValue <= 0 && s.error || s.success} type='number' value={props.maxValue} onChange={props.onChangeHandler}/>
+    return (
+        <div className={"settings-counter-blocks"}>
+            <div className={"settings-counter-block"}>
+                <div className={s.title}>{props.titleValue}</div>
+                <div className="MaxValue">
+                    <div className={s.inputTitle}>Max Value</div>
+                    <input className={props.maxValue <= 0 && s.error || s.success} type='number' value={props.maxValue}
+                           onChange={props.onChangeHandler}/>
+                </div>
+                <div>
+                </div>
+                <div className={"settings-counter-block"}>
+                    <div className={s.inputTitle}>Start Value</div>
+                    <input className={props.startValue <= 0 && s.error || s.success} type='number'
+                           value={props.startValue} onChange={props.onChangeHandlerMinValue}/>
+                    </div>
+                    <div className={s.setValue}>
+                        <button onClick={() => props.maximumValue()}>Set</button>
+                    </div>
             </div>
-          <div>
-              <div>Start Value</div>
-              <input className={props.startValue <= 0 && s.error || s.success} type='number' value={props.startValue} onChange={props.onChangeHandlerMinValue}/>
-          </div>
-            <div>
-                <button onClick={()=>props.maximumValue()}>Set</button>
-            </div>
+
         </div>
     )
 }
