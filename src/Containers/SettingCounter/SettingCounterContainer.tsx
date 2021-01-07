@@ -1,7 +1,5 @@
 import React, {ChangeEvent, useState} from "react";
-import s from "./SettingsCounterCountainer.module.css"
-import {SettingCounter} from "../../Components/SettingCounter/SettingCounter";
-import {Counter} from "../../Components/Counter/Counter";
+import {ComponentsContainer} from "../ComponentsContainer/ComponentsContainer";
 
 
 export const SettingCounterContainer = () => {
@@ -20,58 +18,45 @@ export const SettingCounterContainer = () => {
     function Reset() {
         setCount(startValue);
     }
-
-
-
     function maximumValue() {
         if(startValue > maxValue){
-          return setError("The value cannot be higher than max value")
+            return setError("The value cannot be higher than max value")
         }else{
             return setCount(startValue);
         }
     }
 
-    const onChangeHandlerMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
-        let tt = +e.currentTarget.value
-        if(maxValue > tt || tt < 0) {
-            setError("Invalid value")
-            setMaxValue(tt);
+    const check = (begin: number, end: number) => {
+        if (begin >= end) {
+            setError("start Value >= max Value")
+        } else if (begin && end < 0) {
+            setError(" max Value < 0")
+        } else if (begin < 0) {
+            setError(" start Value < 0")
         } else {
-            setMaxValue(tt);
+            setError("")
         }
-    };
+    }
+    const changeStartValueRender = (e: ChangeEvent<HTMLInputElement>) => {
+        setStartValue(e.currentTarget.valueAsNumber)
+        check(e.currentTarget.valueAsNumber, maxValue)
+    }
+    const changeMaxValueRender = (e: ChangeEvent<HTMLInputElement>) => {
+        setMaxValue(e.currentTarget.valueAsNumber)
+        check(startValue,e.currentTarget.valueAsNumber)
+    }
 
-    const onChangeHandlerMinValue = (e: ChangeEvent<HTMLInputElement>) => {
-        let tt = +e.currentTarget.value
-        if(startValue > 0  || tt < 0) {
-            setError("Invalid value");
-            setStartValue(tt);
-        } else  {
-            setStartValue(tt);
-        }
-    };
 
 
     return (
-        <div className={s.counterContainer}>
-            <SettingCounter
-                error={error}
-                onChangeHandler={onChangeHandlerMaxValue}
-                onChangeHandlerMinValue={onChangeHandlerMinValue}
-                maximumValue={maximumValue}
-                startValue={startValue}
-                maxValue={maxValue}
-                titleValue={"Settings"}
-            />
-            <Counter
-                Increment={Increment}
-                Reset={Reset}
-                maxValue={maxValue}
-                error={error}
-                startValue={startValue}
-                titleValue={"Counter"}
-                Count={count}
-            />
-        </div>
+        <ComponentsContainer error={error}
+                             onChangeHandler={changeMaxValueRender}
+                             onChangeHandlerMinValue={changeStartValueRender}
+                             maximumValue={maximumValue}
+                             startValue={startValue} maxValue={maxValue}
+                             increment={Increment}
+                             reset={Reset}
+                             count={count}
+        />
     )
 }

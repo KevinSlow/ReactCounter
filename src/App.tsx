@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import {SettingCounterContainer} from "./Containers/SettingCounter/SettingCounterContainer";
-import {Counter} from "./Components/Counter/Counter";
 
 
 

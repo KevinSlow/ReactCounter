@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import s from "./Counter.module.css"
 
 
@@ -12,33 +12,28 @@ type CounterPropsType = {
     startValue: number
 }
 
-export const Counter = (props: CounterPropsType) => {
+export const Counter = ({Count, Increment, Reset, maxValue, startValue, titleValue, error}: CounterPropsType) => {
 
-    const Rst = () => {
-        props.Reset()
-    }
-    const Inc = () => {
-        // @ts-ignore
-        props.Increment()
-    }
-
+    const Rst = () => Reset()
+    // @ts-ignore
+    const Inc = () => Increment()
     return (
         <div className={"counter-blocks"}>
             <div className={"counter-blocks_block"}>
                 <div className={s.counter}>
-                    <div className={s.title}>{props.titleValue}</div>
-                    <span>{(props.startValue < 0 || props.maxValue < 0 ? props.error : props.Count) || (props.startValue > props.maxValue ? props.error : props.Count)}</span>
+                    <div className={s.title}>{titleValue}</div>
+                    <span>{(startValue < 0 || maxValue < 0 ? error : Count) || (startValue > maxValue ? error : Count) }</span>
                 </div>
             </div>
             <div className={"counter-blocks_block"}>
                 <div className={s.buttonsBlocks}>
                     <div className={s.buttonsBlock}>
-                        <button disabled={props.Count === props.maxValue}
-                                className={props.Count === props.maxValue ? s.error : ""} onClick={Inc}>Inc
+                        <button disabled={Count === maxValue}
+                                className={Count === maxValue ? s.error : ""} onClick={Inc}>Inc
                         </button>
                     </div>
                     <div className={s.buttonsBlock}>
-                        <button disabled={props.Count === 0} onClick={Rst}>Reset</button>
+                        <button disabled={Count === 0} onClick={Rst}>Reset</button>
                     </div>
                 </div>
             </div>
