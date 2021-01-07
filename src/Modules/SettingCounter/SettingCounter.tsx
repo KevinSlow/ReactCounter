@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, Dispatch, SetStateAction, useState} from "react";
 import s from "./SettingCounter.module.css"
 import {MaxValue} from "../../Components/Input/MaxValue";
 import {StartValue} from "../../Components/Input/StartValue";
@@ -12,6 +12,11 @@ type CounterPropsType = {
     maximumValue: () => void,
     startValue: number,
     onChangeHandlerMinValue: (e: ChangeEvent<HTMLInputElement>) => void,
+    startValueRender: number
+    setStartValueRender: (start: number) => void
+    maxValueRender: number
+    setMaxValueRender: (max: number) => void
+    setButtonHandler: () => void
 }
 
 export const SettingCounter = (props: CounterPropsType) => {
@@ -25,8 +30,8 @@ export const SettingCounter = (props: CounterPropsType) => {
                 </div>
                 <StartValue startValue={props.startValue} onChange={props.onChangeHandlerMinValue}/>
                 <div className={s.setValue}>
-                    <button disabled={(props.onChangeHandlerMinValue === props.startValue && props.maxValue === props.onChangeHandler) || props.error !== ""}
-                            onClick={() => props.maximumValue()}>Set</button>
+                    <button disabled={(props.startValueRender === props.startValue && props.maxValue === props.maxValueRender) || props.error !== ""}
+                            onClick={props.setButtonHandler}>Set</button>
                 </div>
             </div>
 

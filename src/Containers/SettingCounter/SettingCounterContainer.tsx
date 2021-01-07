@@ -8,7 +8,8 @@ export const SettingCounterContainer = () => {
     const [maxValue, setMaxValue] = useState<number>(0);
     const [error, setError] = useState<string>("")
     let [count, setCount] = useState(startValue);
-
+    const [startValueRender, setStartValueRender] = useState<number>(0)
+    const [maxValueRender, setMaxValueRender] = useState<number>(0)
     function Increment() {
         setError("")
         let inc = count + 1
@@ -16,13 +17,20 @@ export const SettingCounterContainer = () => {
     }
 
     function Reset() {
-        setCount(startValue);
+        setCount(startValueRender);
     }
     function maximumValue() {
         if(startValue > maxValue){
             return setError("The value cannot be higher than max value")
         }else{
             return setCount(startValue);
+        }
+    }
+    const setButtonHandler = () => {
+        if (!error) {
+            setStartValue(startValue)
+            setMaxValue(maxValue)
+
         }
     }
 
@@ -50,6 +58,11 @@ export const SettingCounterContainer = () => {
 
     return (
         <ComponentsContainer error={error}
+                             setButtonHandler={setButtonHandler}
+                             startValueRender={startValueRender}
+                             setStartValueRender={setStartValueRender}
+                             maxValueRender={maxValueRender}
+                             setMaxValueRender={setMaxValueRender}
                              onChangeHandler={changeMaxValueRender}
                              onChangeHandlerMinValue={changeStartValueRender}
                              maximumValue={maximumValue}
