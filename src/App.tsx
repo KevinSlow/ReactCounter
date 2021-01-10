@@ -4,26 +4,30 @@ import './App.css';
 import {SettingCounterContainer} from "./Containers/SettingCounter/SettingCounterContainer";
 import store from './redux/reduxStore';
 import {compose} from "redux";
-import {incrementAC} from "./redux/counterReducer";
+import {incrementAC, resetAC} from "./redux/counterReducer";
 
 
 
-function App() {
+function App(props:any) {
   return (
     <div className="App">
-      <SettingCounterContainer />
+      <SettingCounterContainer
+      counter={props.counter}
+      setCount={props.incrementAC}
+      />
     </div>
   );
 }
 
-const mapStateToProps = (state: any) => ({
-    startValue: state.counter.startValue,
-    maxValue: state.counter.maxValue,
-});
+let mapStateToProps = (state: any) => {
+    return {
+        startValue: state.counter.startValue,
+        maxValue: state.counter.maxValue,
+        counter: state.counter.counter,
+    }
+}
 
-let AppContainer = compose<any>(
-    connect(mapStateToProps, { incrementAC })
-)(App);
+export const AppContainer = connect(mapStateToProps, {incrementAC, resetAC})(App)
 
 export const CounterJSApp = () => {
     return (

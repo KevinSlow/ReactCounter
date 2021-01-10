@@ -5,7 +5,7 @@ import s from "./Counter.module.css"
 type CounterPropsType = {
     titleValue: string,
     Reset: () => void,
-    Increment: (e: ChangeEvent<HTMLInputElement>) => void
+    Increment: () => void
     Count: number
     error: string
     maxValue: number
@@ -16,27 +16,27 @@ type CounterPropsType = {
     setMaxValueRender: (max: number) => void
 }
 
-export const Counter = ({Count, Increment, Reset, maxValue, startValue, titleValue, error,startValueRender,setStartValueRender,maxValueRender,setMaxValueRender}: CounterPropsType) => {
+export const Counter = ({...restProps}: any) => {
 
-    const Rst = () => Reset()
+    const Rst = () => restProps.Reset()
+
 
     return (
         <div className={"counter-blocks"}>
             <div className={"counter-blocks_block"}>
                 <div className={s.counter}>
-                    <div className={s.title}>{titleValue}</div>
-                    <span>{(startValueRender < 0 || maxValue < 0 ? error : Count) || (startValueRender > maxValue ? error : Count) }</span>
+                    <div className={s.title}>{restProps.titleValue}</div>
+                    <span>{restProps.Count}</span>
                 </div>
             </div>
             <div className={"counter-blocks_block"}>
                 <div className={s.buttonsBlocks}>
                     <div className={s.buttonsBlock}>
-                        <button disabled={Count === maxValue}
-                                className={Count === maxValue ? s.error : ""} onClick={() => Increment}>Inc
+                        <button disabled={restProps.Count === restProps.maxValue} className={restProps.Count === restProps.maxValue ? s.error : ""} onClick={restProps.Increment}>Inc
                         </button>
                     </div>
                     <div className={s.buttonsBlock}>
-                        <button disabled={Count === 0} onClick={Rst}>Reset</button>
+                        <button disabled={restProps.Count === 0} onClick={Rst}>Reset</button>
                     </div>
                 </div>
             </div>

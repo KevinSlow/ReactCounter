@@ -10,17 +10,21 @@ const RESET = "RESET";
 export const counterReducer = (state = initState, action: any): any => {
     switch (action.type) {
         case SET_NUMBER: {
-            return {...state, count: action.count + 1};
+            const incNumber = state.counter + 1
+            return {...state, count: incNumber};
         }
         case RESET: {
-            return {...state, count: 0};
+            return {...state, count: state.startValue};
         }
 
         default: return state;
     }
 };
 
-export const incrementAC = (count: number) => ({
+export const incrementAC = () => ({
     type: SET_NUMBER,
-    count,
+});
+
+export const resetAC = () => ({
+    type: SET_NUMBER,
 });

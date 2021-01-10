@@ -1,36 +1,37 @@
 import React, {ChangeEvent, useState} from "react";
 import {ComponentsContainer} from "../ComponentsContainer/ComponentsContainer";
+import s from "./SettingsCounterCountainer.module.css";
+import {SettingCounter} from "../../Modules/SettingCounter/SettingCounter";
+import {Counter} from "../../Modules/Counter/Counter";
 
 
-export const SettingCounterContainer = () => {
-
+export const SettingCounterContainer = ({...restProps}: any) => {
+    console.log(restProps)
     const [startValue, setStartValue] = useState<number>(0)
     const [maxValue, setMaxValue] = useState<number>(0);
     const [error, setError] = useState<string>("")
-    let [count, setCount] = useState(startValue);
+
     const [startValueRender, setStartValueRender] = useState<number>(0)
     const [maxValueRender, setMaxValueRender] = useState<number>(0)
-    function Increment() {
-        setError("")
-        let inc = count + 1
-        setCount(inc);
-    }
+
+
 
     function Reset() {
-        setCount(startValueRender);
+        restProps.setCount(startValueRender);
     }
+
     function maximumValue() {
-        if(startValue > maxValue){
+        if (startValue > maxValue) {
             return setError("The value cannot be higher than max value")
-        }else{
-            return setCount(startValue);
+        } else {
+            return restProps.setCount;
         }
     }
+
     const setButtonHandler = () => {
         if (!error) {
             setStartValue(startValue)
             setMaxValue(maxValue)
-
         }
     }
 
@@ -51,25 +52,41 @@ export const SettingCounterContainer = () => {
     }
     const changeMaxValueRender = (e: ChangeEvent<HTMLInputElement>) => {
         setMaxValue(e.currentTarget.valueAsNumber)
-        check(startValue,e.currentTarget.valueAsNumber)
+        check(startValue, e.currentTarget.valueAsNumber)
     }
 
 
-
     return (
-        <ComponentsContainer error={error}
-                             setButtonHandler={setButtonHandler}
-                             startValueRender={startValueRender}
-                             setStartValueRender={setStartValueRender}
-                             maxValueRender={maxValueRender}
-                             setMaxValueRender={setMaxValueRender}
-                             onChangeHandler={changeMaxValueRender}
-                             onChangeHandlerMinValue={changeStartValueRender}
-                             maximumValue={maximumValue}
-                             startValue={startValue} maxValue={maxValue}
-                             increment={Increment}
-                             reset={Reset}
-                             count={count}
-        />
+        <>
+            <div className={s.counterContainer}>
+                <SettingCounter
+                    setButtonHandler={setButtonHandler}
+                    startValueRender={startValueRender}
+                    setStartValueRender={setStartValueRender}
+                    maxValueRender={maxValueRender}
+                    setMaxValueRender={setMaxValueRender}
+                    error={error}
+                    onChangeHandler={changeMaxValueRender}
+                    onChangeHandlerMinValue={changeStartValueRender}
+                    maximumValue={maximumValue}
+                    startValue={restProps.startValue}
+                    maxValue={restProps.maxValue}
+                    titleValue={"Settings"}
+                />
+                <Counter
+                    startValueRender={startValueRender}
+                    setStartValueRender={setStartValueRender}
+                    maxValueRender={maxValueRender}
+                    setMaxValueRender={setMaxValueRender}
+                    Increment={restProps.setCount}
+                    Reset={Reset}
+                    maxValue={restProps.maxValue}
+                    error={error}
+                    startValue={restProps.startValue}
+                    titleValue={"Counter"}
+                    Count={restProps.counter}
+                />
+            </div>
+        </>
     )
 }
