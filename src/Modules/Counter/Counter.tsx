@@ -6,7 +6,7 @@ type CounterPropsType = {
     titleValue: string,
     Reset: () => void,
     Increment: () => void
-    Count: number
+    counter: number
     error: string
     maxValue: number
     startValue: number
@@ -16,7 +16,7 @@ type CounterPropsType = {
     setMaxValueRender: (max: number) => void
 }
 
-export const Counter = ({...restProps}: any) => {
+export const Counter = ({...restProps}: CounterPropsType) => {
 
     const Rst = () => restProps.Reset()
 
@@ -26,17 +26,17 @@ export const Counter = ({...restProps}: any) => {
             <div className={"counter-blocks_block"}>
                 <div className={s.counter}>
                     <div className={s.title}>{restProps.titleValue}</div>
-                    <span>{restProps.Count}</span>
+                    <span>{restProps.counter}</span>
                 </div>
             </div>
             <div className={"counter-blocks_block"}>
                 <div className={s.buttonsBlocks}>
                     <div className={s.buttonsBlock}>
-                        <button disabled={restProps.Count === restProps.maxValue} className={restProps.Count === restProps.maxValue ? s.error : ""} onClick={restProps.Increment}>Inc
+                        <button disabled={restProps.counter === restProps.maxValue} className={restProps.counter === restProps.maxValue ? s.error : ""} onClick={restProps.Increment}>Inc
                         </button>
                     </div>
                     <div className={s.buttonsBlock}>
-                        <button disabled={restProps.Count === 0} onClick={Rst}>Reset</button>
+                        <button disabled={restProps.counter === 0} onClick={Rst}>Reset</button>
                     </div>
                 </div>
             </div>

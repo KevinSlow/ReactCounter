@@ -1,10 +1,12 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {counterReducer} from "./counterReducer";
+import { settingsCounterReducer } from "./settingCounterReducer";
 
 
 
 export let reducers = combineReducers({
-    counter: counterReducer
+    counter: counterReducer,
+    settingsCounter: settingsCounterReducer
 });
 
 export type ReduxState = ReturnType<typeof reducers>;

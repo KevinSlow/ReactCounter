@@ -1,37 +1,36 @@
 import React, {ChangeEvent, useState} from "react";
 import {ComponentsContainer} from "../ComponentsContainer/ComponentsContainer";
 import s from "./SettingsCounterCountainer.module.css";
-import {SettingCounter} from "../../Modules/SettingCounter/SettingCounter";
 import {Counter} from "../../Modules/Counter/Counter";
+import {MaxValueRenderAC, StartValueRenderAC} from "../../redux/settingCounterReducer";
+import { connect } from "react-redux";
+import { SettingCounter } from "../../Modules/SettingCounter/SettingCounter";
 
 
-export const SettingCounterContainer = ({...restProps}: any) => {
-    console.log(restProps)
-    const [startValue, setStartValue] = useState<number>(0)
-    const [maxValue, setMaxValue] = useState<number>(0);
+export const SettingCounterContainer = ({...props}: any) => {
+    console.log(props)
+    const [startValue, setStartValue] = useState<number>(props.startValue)
+    const [maxValue, setMaxValue] = useState<number>(props.maxValue);
     const [error, setError] = useState<string>("")
 
-    const [startValueRender, setStartValueRender] = useState<number>(0)
-    const [maxValueRender, setMaxValueRender] = useState<number>(0)
+    const [startValueRender, setStartValueRender] = useState<number>(props.startValue)
+    const [maxValueRender, setMaxValueRender] = useState<number>(props.maxValue)
 
 
-
-    function Reset() {
-        restProps.setCount(startValueRender);
-    }
 
     function maximumValue() {
         if (startValue > maxValue) {
             return setError("The value cannot be higher than max value")
         } else {
-            return restProps.setCount;
+            return props.setCount;
         }
     }
 
     const setButtonHandler = () => {
         if (!error) {
-            setStartValue(startValue)
-            setMaxValue(maxValue)
+            props.setStartValue(startValueRender)
+            props.setMaxValue(maxValueRender)
+            props.reset()
         }
     }
 
@@ -69,24 +68,25 @@ export const SettingCounterContainer = ({...restProps}: any) => {
                     onChangeHandler={changeMaxValueRender}
                     onChangeHandlerMinValue={changeStartValueRender}
                     maximumValue={maximumValue}
-                    startValue={restProps.startValue}
-                    maxValue={restProps.maxValue}
+                    startValue={startValue}
+                    maxValue={maxValue}
                     titleValue={"Settings"}
                 />
                 <Counter
                     startValueRender={startValueRender}
-                    setStartValueRender={setStartValueRender}
+                    setStartValueRender={props.setStartValueRender}
                     maxValueRender={maxValueRender}
-                    setMaxValueRender={setMaxValueRender}
-                    Increment={restProps.setCount}
-                    Reset={Reset}
-                    maxValue={restProps.maxValue}
+                    setMaxValueRender={props.setMaxValueRender}
+                    Increment={props.setCount}
+                    Reset={props.reset}
+                    maxValue={maxValue}
                     error={error}
-                    startValue={restProps.startValue}
+                    startValue={startValue}
                     titleValue={"Counter"}
-                    Count={restProps.counter}
+                    counter={props.counter}
                 />
             </div>
         </>
     )
 }
+
