@@ -11,8 +11,6 @@ export const SettingCounterContainer = ({...props}: any) => {
     console.log(props)
     const [startValue, setStartValue] = useState<number>(props.startValue)
     const [maxValue, setMaxValue] = useState<number>(props.maxValue);
-    const [error, setError] = useState<string>("")
-
     const [startValueRender, setStartValueRender] = useState<number>(props.startValue)
     const [maxValueRender, setMaxValueRender] = useState<number>(props.maxValue)
 
@@ -20,38 +18,38 @@ export const SettingCounterContainer = ({...props}: any) => {
 
     function maximumValue() {
         if (startValue > maxValue) {
-            return setError("The value cannot be higher than max value")
+            return props.setError("The value cannot be higher than max value")
         } else {
             return props.setCount;
         }
     }
 
     const setButtonHandler = () => {
-        if (!error) {
-            props.setStartValue(startValueRender)
-            props.setMaxValue(maxValueRender)
+        if (!props.error) {
+            props.setStartValue(startValue)
+            props.setMaxValue(maxValue)
             props.reset()
         }
     }
 
     const check = (begin: number, end: number) => {
         if (begin >= end) {
-            setError("start Value >= max Value")
+            props.setError("start Value >= max Value")
         } else if (begin && end < 0) {
-            setError(" max Value < 0")
+            props.setError(" max Value < 0")
         } else if (begin < 0) {
-            setError(" start Value < 0")
+            props.setError(" start Value < 0")
         } else {
-            setError("")
+            props.setError("")
         }
     }
     const changeStartValueRender = (e: ChangeEvent<HTMLInputElement>) => {
         setStartValue(e.currentTarget.valueAsNumber)
-        check(e.currentTarget.valueAsNumber, maxValue)
+        check(e.currentTarget.valueAsNumber, props.maxValue)
     }
     const changeMaxValueRender = (e: ChangeEvent<HTMLInputElement>) => {
         setMaxValue(e.currentTarget.valueAsNumber)
-        check(startValue, e.currentTarget.valueAsNumber)
+        check(props.startValue, e.currentTarget.valueAsNumber)
     }
 
 
@@ -64,7 +62,7 @@ export const SettingCounterContainer = ({...props}: any) => {
                     setStartValueRender={setStartValueRender}
                     maxValueRender={maxValueRender}
                     setMaxValueRender={setMaxValueRender}
-                    error={error}
+                    error={props.error}
                     onChangeHandler={changeMaxValueRender}
                     onChangeHandlerMinValue={changeStartValueRender}
                     maximumValue={maximumValue}
@@ -80,7 +78,7 @@ export const SettingCounterContainer = ({...props}: any) => {
                     Increment={props.setCount}
                     Reset={props.reset}
                     maxValue={maxValue}
-                    error={error}
+                    error={props.error}
                     startValue={startValue}
                     titleValue={"Counter"}
                     counter={props.counter}

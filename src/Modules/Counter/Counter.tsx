@@ -26,7 +26,7 @@ export const Counter = ({...restProps}: CounterPropsType) => {
             <div className={"counter-blocks_block"}>
                 <div className={s.counter}>
                     <div className={s.title}>{restProps.titleValue}</div>
-                    <span>{restProps.counter}</span>
+                    <span>{restProps.error ? restProps.error : restProps.counter}</span>
                 </div>
             </div>
             <div className={"counter-blocks_block"}>

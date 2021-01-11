@@ -12,8 +12,10 @@ type MaxValueRenderACType = {
     type: 'SET_MAX_VALUE_RENDER'
     value: number
 }
+
 type ErrorACType = {
-    type: 'ERROR'
+    type: 'ERROR',
+    error: string
 }
 
 const SET_START_VALUE_RENDER = "SET_START_VALUE_RENDER"
@@ -30,9 +32,9 @@ export const settingsCounterReducer = (state: any = initialState, action: Action
         case "SET_MAX_VALUE_RENDER": {
             return {...state, maxValueRender: action.value};
         }
-        // case "ERROR": {
-        //     return {...state, display: state.startValue};
-        // }
+        case "ERROR": {
+            return {...state, error: action.error};
+        }
         default:
             return state;
     }
@@ -42,4 +44,8 @@ export const StartValueRenderAC = (value: number): StartValueRenderACType => {
 }
 export const MaxValueRenderAC = (value: number): MaxValueRenderACType => {
     return {type: "SET_MAX_VALUE_RENDER", value}
+}
+
+export const errorAction = (error: string): ErrorACType => {
+    return {type: "ERROR", error}
 }

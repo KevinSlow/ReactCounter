@@ -3,7 +3,7 @@ import {connect, Provider} from 'react-redux';
 import './App.css';
 import store from './redux/reduxStore';
 import {incrementAC, MaxValueAC, resetAC, StartValueAC} from "./redux/counterReducer";
-import {MaxValueRenderAC, StartValueRenderAC} from "./redux/settingCounterReducer";
+import {errorAction, MaxValueRenderAC, StartValueRenderAC} from "./redux/settingCounterReducer";
 import { SettingCounterContainer } from './Containers/SettingCounter/SettingCounterContainer';
 
 
@@ -21,6 +21,8 @@ function App(props:any) {
           setCount={props.increment}
           startValueRender={props.startValueRender}
           maxValueRender={props.maxValueRender}
+          setError={props.SetError}
+          error={props.error}
       />
     </div>
   );
@@ -33,6 +35,7 @@ let mapStateToProps = (state: any) => {
         counter: state.counter.counter,
         startValueRender: state.settingsCounter.startValueRender,
         maxValueRender: state.settingsCounter.maxValueRender,
+        error: state.settingsCounter.error
     }
 }
 let mapDispatchToProps = (dispatch: (action: any) => void) => {
@@ -46,6 +49,7 @@ let mapDispatchToProps = (dispatch: (action: any) => void) => {
         setMaxValue: (value: number) => dispatch(MaxValueAC(value)),
         setDisplay: (value: number) => dispatch(MaxValueAC(value)),
         reset: () => dispatch(resetAC()),
+        SetError: (error: string) => (dispatch(errorAction(error)))
     }
 
 }
