@@ -36,7 +36,7 @@ export const Counter = ({...restProps}: CounterPropsType) => {
                         </button>
                     </div>
                     <div className={s.buttonsBlock}>
-                        <button disabled={restProps.counter === 0} onClick={Rst}>Reset</button>
+                        <button disabled={restProps.counter === restProps.startValue} onClick={Rst}>Reset</button>
                     </div>
                 </div>
             </div>
