@@ -2,8 +2,15 @@ import React from 'react';
 import {connect, Provider} from 'react-redux';
 import './App.css';
 import store from './redux/reduxStore';
-import {incrementAC, MaxValueAC, resetAC, StartValueAC} from "./redux/counterReducer";
-import {errorAction, MaxValueRenderAC, StartValueRenderAC} from "./redux/settingCounterReducer";
+import {
+    errorAction,
+    incrementAC,
+    MaxValueAC,
+    MaxValueRenderAC,
+    resetAC,
+    StartValueAC,
+    StartValueRenderAC
+} from "./redux/counterReducer";
 import { SettingCounterContainer } from './Containers/SettingCounter/SettingCounterContainer';
 
 
@@ -33,9 +40,9 @@ let mapStateToProps = (state: any) => {
         startValue: state.counter.startValue,
         maxValue: state.counter.maxValue,
         counter: state.counter.counter,
-        startValueRender: state.settingsCounter.startValueRender,
-        maxValueRender: state.settingsCounter.maxValueRender,
-        error: state.settingsCounter.error
+        startValueRender: state.counter.startValueRender,
+        maxValueRender: state.counter.maxValueRender,
+        error: state.counter.error
     }
 }
 let mapDispatchToProps = (dispatch: (action: any) => void) => {
