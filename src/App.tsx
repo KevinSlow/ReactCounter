@@ -51,7 +51,6 @@ let mapDispatchToProps = (dispatch: (action: any) => void) => {
         reset: () => dispatch(resetAC()),
         SetError: (error: string) => (dispatch(errorAction(error)))
     }
-
 }
 export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App)
 
